@@ -36,8 +36,14 @@ public SharedPlugin:__pl_skins_weapons =
 #if !defined REQUIRE_PLUGIN
 public void __pl_skins_weapons_SetNTVOptional()
 {
-	MarkNativeAsOptional("native1");
-	MarkNativeAsOptional("native2");
-	MarkNativeAsOptional("native3");
+	MarkNativeAsOptional("GetIDClient_SkinsWeapons");
+	MarkNativeAsOptional("AddWeapon_SkinsWeapons");
+	MarkNativeAsOptional("DelWeapon_SkinsWeapons");
+	MarkNativeAsOptional("CheckSkinWeapon_SkinsWeapons");
+	MarkNativeAsOptional("CheckWeapon_SkinsWeapons");
+	MarkNativeAsOptional("AddTime_SkinsWeapons");
+	MarkNativeAsOptional("EnableWeapon_SkinsWeapons");
+	MarkNativeAsOptional("NewClient_SkinsWeapons");
+	MarkNativeAsOptional("SetOnSequences_SkinsWeapons");
 }
 #endif
